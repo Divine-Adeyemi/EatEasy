@@ -109,77 +109,28 @@ body {
 .custom-swiper-pagination {
   background-color: rgba(142, 142, 169, 0.3) !important;
 }
-/* src/index.css */
 
-/* 1. CONTAINER: Flex layout to hold flag and input side-by-side */
-.PhoneInput {
-  display: flex;
-  align-items: center;
-}
-
-/* 2. FLAG CONTAINER: Restricted width and height */
-.PhoneInputCountry {
-  position: relative; /* Anchor for the absolute select box */
-  display: flex;
-  align-items: center;
-  margin-right: 12px;
-  
-  /* Create the Divider Line using padding + border */
-  padding-right: 12px;
-  border-right: 1px solid #E5E7EB;
-  
-  /* CRITICAL FIX: Prevent vertical expansion */
-  height: 24px; /* Fix the height of the flag area */
-}
-
-/* Dark mode divider */
-.dark .PhoneInputCountry {
-  border-right-color: #404040;
-}
-
-/* 3. THE SELECT MENU: Constrained to the flag container */
-.PhoneInputCountrySelect {
+.react-tel-input .selected-flag::after {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  opacity: 0; /* Invisible but clickable */
-  cursor: pointer;
-  appearance: none; /* Removes browser default styling */
-  border: none;
-  margin: 0; 
-  padding: 0;
+  right: 0;
+  top: 25%;         
+  height: 50%;      
+  width: 1px;      
+  background-color: #E5E7EB; 
+}
+.dark .react-tel-input .selected-flag::after {
+  background-color: #404040; 
 }
 
-/* 4. THE FLAG ICON: Fixed size */
-.PhoneInputCountryIcon {
-  width: 28px !important;
-  height: 100% !important; /* Fill the fixed 24px container height */
-  overflow: hidden;
-  display: flex;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+/
+.react-tel-input .flag-dropdown,
+.react-tel-input .selected-flag {
+  background: transparent !important;
+  border: none !important;
 }
 
-.PhoneInputCountryIconImg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 5. TEXT INPUT: Reset */
-.PhoneInputInput {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  width: 100%;
-  color: inherit;
-  padding: 0;
-}
-
-/* 6. HIDE ARROW */
-.PhoneInputCountrySelectArrow {
-  display: none;
+.react-tel-input .selected-flag {
+  width: 46px !important;
+  padding-left: 10px !important;
 }

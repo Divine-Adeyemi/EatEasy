@@ -4,8 +4,8 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Button from '../../components/ui/Button'; 
 import Slider from '../../components/layouts/Slider'; 
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 export default function EmailVerification() {
   const navigate = useNavigate();
@@ -92,18 +92,16 @@ export default function EmailVerification() {
                     className=' w-full px-4 py-4 rounded-xl border border-gray-200 dark:border-[var(--neutral-700)] bg-white dark:bg-[var(--neutral-800)] dark:text-white outline-none transition-all'/>
                 </div>
 
-                 {/* PHONE NUMBER */}
+        
             <div className="space-y-1">
-              <PhoneInput international defaultCountry="US" value={formData.phone}  onChange={(value) => setFormData({ ...formData, phone: value })}  placeholder="Phone Number"
-                
-                className="flex items-center w-full px-4 py-4 rounded-xl border border-gray-200 dark:border-[var(--neutral-700)] bg-white dark:bg-[var(--neutral-800)] focus-within:ring-2 focus-within:ring-[var(--primary-200)] focus-within:border-[var(--primary-600)] transition-all"
-                
-                numberInputProps={{
-                  className: "w-full bg-transparent outline-none placeholder-gray-400 dark:placeholder-gray-500 font-medium" 
-                }}
+              <PhoneInput country={'us'} value={formData.phone} onChange={(phone) => setFormData({ ...formData, phone })}
+              containerClass="w-full"
+              inputClass="!w-full !h-[58px] !pl-[60px] !pr-4 !rounded-xl !border-gray-200 dark:!border-[var(--neutral-700)] !bg-white dark:!bg-[var(--neutral-800)] !text-[var(--text-primary)] !text-base focus:!ring-2 focus:!ring-[var(--primary-200)] focus:!border-[var(--primary-600)] !transition-all"
+              buttonClass="!bg-transparent !border-0 !rounded-l-xl !pl-3"
+              dropdownClass="!bg-white dark:!bg-[var(--neutral-800)] !text-[var(--text-primary)] !border-gray-200 dark:!border-[var(--neutral-700)] !rounded-xl !shadow-lg !overflow-hidden"
+                disableDropdown={false} 
               />
             </div>
-            
             <div className="relative space-y-1">
               <input
                 type={showPassword ? "text" : "password"} name="password"  placeholder="Password" value={formData.password} onChange={handleChange} 
