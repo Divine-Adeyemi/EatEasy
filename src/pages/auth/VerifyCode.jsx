@@ -77,7 +77,7 @@ export default function VerifyCode() {
 
       if (code === "1234") {
         console.log("Success!");
-        navigate('/dashboard'); 
+        navigate('/SetLocation', { state: { email: displayEmail, username: displayUser } }); 
       } else {
         throw new Error('Invalid code');
       }

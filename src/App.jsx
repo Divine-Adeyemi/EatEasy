@@ -9,6 +9,8 @@ import Login from './pages/auth/Login';
 import EmailVerification from './pages/auth/EmailVerification';
 import VerifyCode from './pages/auth/VerifyCode';
 import CreateAccount from './pages/auth/CreateAccount';
+import SetLocation from './pages/public/SetLocation';
+import DashboardLayout from './components/layouts/DashboardLayout';
 
 
 
@@ -50,6 +52,16 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/Createaccount" element={<CreateAccount/>} />
           <Route path="/verifycode" element={<VerifyCode />} />
+
+          <Route  element={<DashboardLayout/>}>
+          <Route path="/setlocation" element={<SetLocation />} />
+            
+    
+           
+          
+            {/* Add more pages here later */}
+            
+        </Route>
         </Routes>
       
       </div>
