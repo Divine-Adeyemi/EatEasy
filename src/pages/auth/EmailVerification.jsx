@@ -89,11 +89,7 @@ export default function EmailVerification() {
               />
 
             
-              {error && (
-                <p className="text-red-500 text-sm px-1 animate-pulse font-medium">
-                  {error}
-                </p>
-              )}
+              {error && (<p className="text-red-500 text-sm px-1 animate-pulse font-medium"> {error}  </p> )}
             </div>
 
             <Button 

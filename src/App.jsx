@@ -49,7 +49,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Createaccount" element={<CreateAccount/>} />
-          <Route path="/verify-code" element={<VerifyCode />} />
+          <Route path="/verifycode" element={<VerifyCode />} />
         </Routes>
       
       </div>
