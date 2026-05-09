@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const SidebarContext = createContext();
 
 export default function SideNav({ children }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   
