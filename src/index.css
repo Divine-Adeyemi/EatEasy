@@ -99,6 +99,7 @@ body {
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: var(--font-sans);
+   scrollbar-gutter: stable;
 }
 
 /* 6. COMPONENT OVERRIDES */
@@ -163,7 +164,9 @@ body {
   background: var(--neutral-600);
 }
 
-/* Ensure body hides overflow if layout handles it, or let it scroll globally */
-html, body {
-  scrollbar-gutter: stable;
+.dark .leaflet-layer,
+.dark .leaflet-control-zoom-in,
+.dark .leaflet-control-zoom-out,
+.dark .leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
