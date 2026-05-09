@@ -9,40 +9,35 @@ export default function SideNav({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
   
-  const username = location.state?.username || "Robert Fox"; 
+  const username = location.state?.username || "User"; 
   const initial = username.charAt(0).toUpperCase();
 
   return (
-    // overflow-visible is REQUIRED for the chevron button to hang outside
     <aside className="h-full z-50 overflow-visible">
       <nav className={`
         h-full flex flex-col 
-        bg-[#1F1D2B] border-r border-[#2D2B3A] shadow-2xl
+        bg-[var(--bg-secondary)] border-r border-[var(--border-color)] shadow-2xl
         transition-all duration-300 ease-in-out relative
         ${expanded ? 'w-72' : 'w-24'}
       `}>
         
-        {/* 1. HEADER */}
         <div className="p-6 flex items-center justify-center relative">
           <h1 className={`
-            font-bold text-2xl text-white tracking-wide
+            font-bold text-2xl text-[var(--text-primary)] tracking-wide
             overflow-hidden transition-all duration-300 whitespace-nowrap
             ${expanded ? 'w-auto opacity-100' : 'w-0 opacity-0'}
           `}>
-            Eat<span className="text-[#F97316]">Easy</span>
+            Eat<span className="text-[var(--tertiary-700)]">Easy</span>
           </h1>
 
-          {/* --- DESKTOP TOGGLE BUTTON (The Chevrons) --- */}
-          {/* hidden md:block = Hides on mobile. */}
-          {/* absolute -right-3 = Protrudes outside. */}
           <button 
             onClick={() => setExpanded(curr => !curr)}
             className={`
                 hidden md:block 
                 absolute -right-3 top-8 z-50
                 p-1.5 rounded-full 
-                bg-[#252836] text-gray-400 border border-[#2D2B3A] shadow-lg
-                hover:text-white hover:bg-[#F97316] hover:border-[#F97316] 
+                bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] shadow-lg
+                hover:text-white hover:bg-[var(--tertiary-700)] hover:border-[var(--tertiary-700)] 
                 transition-all
             `}
           >
@@ -50,26 +45,24 @@ export default function SideNav({ children }) {
           </button>
         </div>
 
-        {/* 2. USER PROFILE */}
         <div className={`
             flex items-center gap-4 px-6 py-6 mb-2
             transition-all duration-300 
             ${expanded ? 'justify-start' : 'justify-center'}
         `}>
-             <div className="w-12 h-12 shrink-0 rounded-full bg-[#252836] border-2 border-[#252836] flex items-center justify-center overflow-hidden">
-                <span className="text-xl font-bold text-white">{initial}</span>
+             <div className="w-12 h-12 shrink-0 rounded-full bg-[var(--neutral-200)] dark:bg-[var(--neutral-700)] border-2 border-[var(--border-color)] flex items-center justify-center overflow-hidden">
+                <span className="text-xl font-bold text-[var(--text-primary)]">{initial}</span>
              </div>
 
              <div className={`
                 flex flex-col overflow-hidden transition-all duration-300
                 ${expanded ? 'w-40 opacity-100 ml-2' : 'w-0 opacity-0 ml-0'}
              `}>
-                <h4 className="font-bold text-white whitespace-nowrap">{username}</h4>
-                <p className="text-xs text-gray-400 cursor-pointer hover:text-[#F97316] underline decoration-gray-500 hover:decoration-[#F97316] transition-all">View Profile</p>
+                <h4 className="font-bold text-[var(--text-primary)] whitespace-nowrap">{username}</h4>
+                <p className="text-xs text-[var(--neutral-500)] cursor-pointer hover:text-[var(--tertiary-700)] underline transition-all">View Profile</p>
              </div>
         </div>
 
-        {/* 3. NAVIGATION ITEMS */}
         <SidebarContext.Provider value={{ expanded }}>
           <style>{`
             .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -81,34 +74,29 @@ export default function SideNav({ children }) {
           </ul>
         </SidebarContext.Provider>
 
-        {/* 4. LOGOUT */}
-        <div className="p-6 pb-8 bg-[#1F1D2B]">
+        <div className="p-6 pb-8 bg-[var(--bg-secondary)]">
             <li 
                 onClick={() => navigate('/')}
                 className={`
                     relative flex items-center py-3 px-4 rounded-xl cursor-pointer
-                    group transition-colors bg-[#252836] hover:bg-[#2d303e]
+                    group transition-colors bg-[var(--neutral-100)] dark:bg-[var(--neutral-800)] hover:bg-[var(--neutral-200)] dark:hover:bg-[var(--neutral-700)]
                     ${expanded ? 'justify-start' : 'justify-center'}
                 `}
             >
-                <LogOut size={20} className="text-gray-400 group-hover:text-white transition-colors" />
+                <LogOut size={20} className="text-[var(--text-primary)] opacity-70 group-hover:opacity-100 transition-colors" />
                 <span className={`
-                    overflow-hidden transition-all duration-300 font-medium whitespace-nowrap text-gray-300 group-hover:text-white
+                    overflow-hidden transition-all duration-300 font-medium whitespace-nowrap text-[var(--text-primary)]
                     ${expanded ? 'w-40 ml-4 opacity-100' : 'w-0 ml-0 opacity-0'}
                 `}>
                     Logout
                 </span>
             </li>
         </div>
-
       </nav>
     </aside>
   );
 }
 
-// =========================================================
-// COMPONENT: REGULAR ITEM
-// =========================================================
 export function SidebarItem({ icon, text, active, onClick }) {
   const { expanded } = useContext(SidebarContext);
   return (
@@ -118,14 +106,14 @@ export function SidebarItem({ icon, text, active, onClick }) {
         relative flex items-center py-3 px-3
         font-medium rounded-xl cursor-pointer
         transition-colors group
-        ${active ? "bg-[#252836]" : "hover:bg-transparent"}
+        ${active ? "bg-[var(--neutral-100)] dark:bg-[var(--neutral-800)]" : "hover:bg-transparent"}
         ${expanded ? 'justify-start' : 'justify-center'}
     `}>
       <div className={`
         p-2.5 rounded-xl transition-all duration-300
         ${active 
-            ? 'bg-[#252836] border border-gray-600 text-white' 
-            : 'bg-[#252836] text-gray-400 group-hover:text-white'
+            ? 'bg-[var(--primary-600)] text-white shadow-lg' 
+            : 'bg-[var(--neutral-100)] dark:bg-[var(--neutral-800)] text-[var(--text-primary)] group-hover:bg-[var(--neutral-200)] dark:group-hover:bg-[var(--neutral-700)]'
         }
       `}>
         {icon}
@@ -133,7 +121,7 @@ export function SidebarItem({ icon, text, active, onClick }) {
       <span className={`
         overflow-hidden transition-all duration-300 whitespace-nowrap
         ${expanded ? 'w-40 ml-4 opacity-100' : 'w-0 ml-0 opacity-0'}
-        ${active ? 'text-white font-bold' : 'text-gray-400'}
+        ${active ? 'text-[var(--primary-600)] dark:text-[var(--primary-500)] font-bold' : 'text-[var(--text-primary)] opacity-70'}
       `}>
         {text}
       </span>
@@ -141,9 +129,6 @@ export function SidebarItem({ icon, text, active, onClick }) {
   );
 }
 
-// =========================================================
-// COMPONENT: FOLDER (Matches your Yellow/Orange Design)
-// =========================================================
 export function SidebarFolder({ icon, text, active, children }) {
     const { expanded } = useContext(SidebarContext);
     const [isOpen, setIsOpen] = useState(active); 
@@ -162,34 +147,30 @@ export function SidebarFolder({ icon, text, active, children }) {
                     ${expanded ? 'justify-start' : 'justify-center'}
                 `}
             >
-                {/* Yellow Icon Box */}
                 <div className={`
                     p-2.5 rounded-xl transition-all duration-300 relative z-20 shrink-0
                     ${active || isOpen
-                        ? 'bg-[#FFCA40] text-white shadow-[0_0_15px_rgba(255,202,64,0.4)]' 
-                        : 'bg-[#252836] text-gray-400 hover:text-white'
+                        ? 'bg-[var(--secondary-800)] text-white shadow-[0_0_15px_rgba(250,163,0,0.4)]' 
+                        : 'bg-[var(--neutral-100)] dark:bg-[var(--neutral-800)] text-[var(--text-primary)]'
                     }
                 `}>
                     {icon}
                 </div>
-                {/* Yellow Text */}
                 <span className={`
                     overflow-hidden transition-all duration-300 whitespace-nowrap ml-4
                     ${expanded ? 'w-auto opacity-100' : 'w-0 opacity-0'}
-                    ${active || isOpen ? 'text-[#FFCA40] font-bold' : 'text-gray-400'}
+                    ${active || isOpen ? 'text-[var(--secondary-800)] font-bold' : 'text-[var(--text-primary)] opacity-70'}
                 `}>
                     {text}
                 </span>
             </div>
 
-            {/* The Yellow Vertical Line */}
             <div className={`
-                absolute left-[29px] top-12 w-[2px] rounded-full bg-[#FFCA40] opacity-80
+                absolute left-[29px] top-12 w-[2px] rounded-full bg-[var(--secondary-800)] opacity-80
                 transition-all duration-500 ease-in-out
                 ${expanded && isOpen ? 'h-[calc(100%-60px)]' : 'h-0'}
             `}></div>
 
-            {/* Sub Items */}
             <div className={`
                 grid transition-[grid-template-rows] duration-500 ease-in-out
                 ${isOpen && expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
@@ -209,10 +190,9 @@ export function SidebarSubItem({ text, active, onClick }) {
             className={`
                 relative flex items-center py-3 pl-[70px] pr-3
                 text-sm cursor-pointer transition-all
-                hover:text-white
                 ${active 
-                    ? 'text-white font-bold' 
-                    : 'text-gray-400'
+                    ? 'text-[var(--secondary-800)] font-bold' 
+                    : 'text-[var(--text-primary)] opacity-60 hover:opacity-100'
                 }
             `}
         >
@@ -225,7 +205,7 @@ export function SidebarSection({ title }) {
     const { expanded } = useContext(SidebarContext);
     return (
         <div className={`
-            text-gray-500 text-[10px] font-bold uppercase mt-4 mb-1 px-3 tracking-widest
+            text-[var(--neutral-500)] text-[10px] font-bold uppercase mt-4 mb-1 px-3 tracking-widest
             transition-all duration-300 overflow-hidden whitespace-nowrap
             ${expanded ? 'opacity-100 h-auto' : 'opacity-0 h-0'}
         `}>

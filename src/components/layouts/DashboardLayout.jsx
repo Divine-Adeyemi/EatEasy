@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react'; 
-// IMPORTANT: We import the specific Folder components here so they render
 import SideNav, { SidebarItem, SidebarSection, SidebarFolder, SidebarSubItem } from './SideNav'; 
-import { ShoppingBag, MapPin, Clock, HelpCircle, Gift, LayoutDashboard } from 'lucide-react';
+import { ShoppingBag, MapPin, Clock, HelpCircle, Gift } from 'lucide-react';
 
 export default function DashboardLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Helper: Checks if the current path starts with a string (for folder active state)
   const isActive = (path) => location.pathname === path;
   const isFolderActive = (paths) => paths.includes(location.pathname);
 
@@ -20,19 +18,16 @@ export default function DashboardLayout() {
   };
 
   return (
-    <div className="flex h-screen bg-[#F1F3F6] dark:bg-[var(--neutral-900)] overflow-hidden">
-
-      {/* MOBILE HEADER - Justify Start (Left) as requested */}
+    <div className="flex h-screen bg-[var(--bg-primary)] overflow-hidden">
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-transparent h-16 px-6 flex items-center justify-start pointer-events-none">
          <button 
             onClick={() => setIsMobileMenuOpen(true)}
-            className="pointer-events-auto p-2 text-[var(--text-primary)] hover:bg-gray-100 dark:hover:bg-[var(--neutral-700)] rounded-lg"
+            className="pointer-events-auto p-2 text-[var(--text-primary)] hover:bg-[var(--neutral-200)] dark:hover:bg-[var(--neutral-700)] rounded-lg"
          >
             <Menu size={28} />
          </button>
       </div>
 
-      {/* MOBILE OVERLAY */}
       {isMobileMenuOpen && (
         <div 
             className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
@@ -40,7 +35,6 @@ export default function DashboardLayout() {
         />
       )}
 
-      {/* SIDEBAR WRAPPER */}
       <div className={`
         fixed inset-y-0 left-0 z-50 h-full
         transform transition-transform duration-300 ease-in-out
@@ -49,15 +43,11 @@ export default function DashboardLayout() {
       `}>
          <SideNav>
             <SidebarSection title="Menu" />
-            
-            {/* === THE FOLDER === */}
-            {/* This renders the yellow icon, yellow text, and vertical line */}
             <SidebarFolder 
                 icon={<ShoppingBag size={20} />} 
                 text="Food Menu" 
                 active={isFolderActive(['/dashboard', '/smart-assistant', '/full-menu'])}
             >
-                {/* SUB ITEMS */}
                 <SidebarSubItem 
                     text="Smart Assistant" 
                     active={isActive('/smart-assistant')}
@@ -70,7 +60,6 @@ export default function DashboardLayout() {
                 />
             </SidebarFolder>
 
-            {/* === OTHER ITEMS === */}
             <SidebarItem 
                 icon={<Clock size={20} />} 
                 text="Order History" 
@@ -87,15 +76,12 @@ export default function DashboardLayout() {
             <SidebarSection title="General" />
             <SidebarItem icon={<Gift size={20} />} text="My Rewards" active={isActive('/rewards')} onClick={() => handleNavigation('/rewards')} />
             <SidebarItem icon={<HelpCircle size={20} />} text="Help" active={isActive('/help')} onClick={() => handleNavigation('/help')} />
-
          </SideNav>
       </div>
 
-      {/* MAIN CONTENT */}
-      <main className="flex-1 overflow-y-auto relative pt-16 md:pt-0">
+      <main className="flex-1 overflow-y-auto relative pt-16 md:pt-0 bg-[var(--bg-primary)]">
         <Outlet />
       </main>
-
     </div>
   );
 }

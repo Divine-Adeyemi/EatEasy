@@ -49,7 +49,7 @@ export default function EmailVerification() {
       return;
     }
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError('Passwobrd must be at least 6 characters long');
       return;
     }
 
@@ -160,7 +160,7 @@ export default function EmailVerification() {
             
             </form>
         
-            <div className="mt-10">
+            <div className="mt-2 text-sm text-center">
                 {/* LOGIC FIX 8: form="signup-form" links this button to the form above */}
                 <Button 
                     type="submit" 
