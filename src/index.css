@@ -135,3 +135,35 @@ body {
   width: 46px !important;
   padding-left: 10px !important;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: 999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--neutral-700);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-400);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-600);
+}
+
+/* Ensure body hides overflow if layout handles it, or let it scroll globally */
+html, body {
+  scrollbar-gutter: stable;
+}
